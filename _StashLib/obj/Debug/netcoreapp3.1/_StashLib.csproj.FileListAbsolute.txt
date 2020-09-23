@@ -1,0 +1,9 @@
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\bin\Debug\netcoreapp3.1\_StashLib.deps.json
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\bin\Debug\netcoreapp3.1\_StashLib.dll
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\obj\Debug\netcoreapp3.1\_StashLib.csprojAssemblyReference.cache
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\obj\Debug\netcoreapp3.1\_StashLib.AssemblyInfoInputs.cache
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\obj\Debug\netcoreapp3.1\_StashLib.AssemblyInfo.cs
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\bin\Debug\netcoreapp3.1\_StashLib.pdb
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\obj\Debug\netcoreapp3.1\_StashLib.dll
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\obj\Debug\netcoreapp3.1\_StashLib.pdb
+C:\Users\jone.prado\source\repos\_Stash\_StashLib\obj\Debug\netcoreapp3.1\_StashLib.csproj.CoreCompileInputs.cache

@@ -1,0 +1,57 @@
+﻿@page "/add"
+@using _StashFront.Data
+@using _StashLib
+@using System.Net.Http;
+@using Newtonsoft.Json;
+@using System.Text;
+
+<h1>Adicione um novo livro.</h1>
+
+<EditForm Model="@livro" OnValidSubmit="@(async () => await AddLivro())" method="post">
+    <div class="form-group">
+        <label class="control-label" for="nome">Nome:</label>
+        <input class="form-control" type="text" id="nome" @bind-value="livro.Nome" name="nome"><br><br>
+
+        <label class="control-label" for="autor">Autor:</label>
+        <input class="form-control" type="text" id="autor" @bind-value="livro.Autor" name="autor"><br><br>
+
+        <label class="control-label" for="genero">Genero:</label>
+        <input class="form-control" type="text" id="genero" @bind-value="livro.Genero" name="genero"><br><br>
+
+        <label class="control-label" for="locacao">Locação:</label>
+        <input class="form-control" type="text" id="locacao" @bind-value="livro.Emp" name="locacao"><br><br>
+
+        <label class="control-label" for="locacao">Nota:</label>
+        <input class="form-control" type="number" id="nota" @bind-value="livro.Nota" name="nota"><br><br>
+
+        <label class="control-label" for="status">Status:</label>
+        <input class="form-control" type="text" id="status" @bind-value="livro.Status" name="status"><br><br>
+
+    </div>
+
+    <input type="submit" class="btn btn-dark" value="Enviar">
+
+</EditForm>
+
+@code {
+
+    Livro[] _livros;
+
+    Livro livro = new Livro();
+
+    public async Task AddLivro()
+    {
+        try
+        {
+            var novoLivroJson = JsonConvert.SerializeObject(livro);
+            StringContent content = new StringContent(novoLivroJson, Encoding.UTF8, "application/json");
+
+            var httpClient = new HttpClient();
+            var url = "http://localhost:57804/livro/add";
+            var resultRequest =await httpClient.PostAsync($"{url}", content);
+
+        }
+        catch { }
+    }
+
+}

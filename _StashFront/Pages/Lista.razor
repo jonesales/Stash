@@ -1,0 +1,113 @@
+﻿@page "/lista"
+
+@using _StashFront.Data
+@using System.Net.Http;
+@using _StashLib
+@using Newtonsoft.Json;
+@using System.Text;
+
+<h1>Lista de livros.</h1>
+
+<table width="100%" style="background:#0A2464;color:honeydew">
+    <tr class="flex-row">
+        <td width="20">&nbsp;</td>
+        <td class="d-sm-inline-flex align-content-between">
+            @*<input class="form-control-sm" type="text" placeholder="Search" aria-label="Search">
+            <label for="esc">Selecione:</label>
+            <select name="esc">
+                <option value="autor">Autor</option>
+                <option value="genero">Genero</option>
+                <option value="status">Status</option>
+            </select>*@
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2"></td>
+    </tr>
+</table>
+
+@if (Services.GetLista() == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Título</th>
+                <th>Autor</th>
+                <th>Genero</th>
+                <th>Locação</th>
+                <th>Nota</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var liv in Services.GetLista())
+            {
+                <tr>
+                    <td>@liv.Nome</td>
+                    <td>@liv.Autor</td>
+                    <td>@liv.Genero</td>
+                    <td>@liv.Emp</td>
+                    <td>@liv.Nota</td>
+                    <td>@liv.Status</td>
+
+                    <td><button class="btn btn-primary" @onclick="@(async () => await EditarLivro(liv.Nome) )" style="width:110px;">Editar</button></td>
+                    <td><button class="btn btn-danger" @onclick="@(async () => await DeleteLivro(liv.Nome))">Deletar</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+
+
+
+    Livro livro = new Livro();
+
+    //protected async Task GetLista()
+    //{
+    //    try
+    //    {
+    //        var url = "http://localhost:57804/livro/lista";
+
+    //        var httpClient = new HttpClient();
+
+    //        var resultRequest = await httpClient.GetAsync(url);
+
+    //        if (resultRequest.IsSuccessStatusCode)
+    //        {
+    //            var resultJson = resultRequest.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+    //            var result = JsonConvert.DeserializeObject<List<Livro>>(resultJson);
+    //        }
+    //    }
+    //    catch { }
+
+    //}
+
+
+    protected async Task DeleteLivro(string nome)
+    {
+        var httpClient = new HttpClient();
+
+        var url = "http://localhost:57804/livro/excluir";
+
+        await httpClient.DeleteAsync($"{url}?nome={nome}");
+
+    }
+
+    protected async Task EditarLivro(string nome)
+    {
+        var httpClient = new HttpClient();
+
+        var url = "http://localhost:57804/livro/editar";
+
+        var novoLivroJson = JsonConvert.SerializeObject(livro);
+        StringContent content = new StringContent(novoLivroJson, Encoding.UTF8, "application/json");
+
+        await httpClient.PutAsync($"{url}?nome={nome}", content);
+    }
+}
